@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
 
     webVM.vm.synced_folder ".", "/vagrant", oowner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
-    webVM.vm.provision "shell", path: "build-webVM-vm.sh"
+    webVM.vm.provision "shell", path: "build-webserver-vm.sh"
   
   end
 
@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
 	
     databaseVM.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
-    databaseVM.vm.provision "shell", path: "build-database-vm.sh"
+    databaseVM.vm.provision "shell", path: "build-dbserver-vm.sh"
   
   end
   
@@ -92,8 +92,9 @@ Vagrant.configure("2") do |config|
     adminVM.vm.network "private_network", ip: "192.168.56.13"
 
     adminVM.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-
-    adminVM.vm.provision "shell", path: "build-adminVM-vm.sh"
+    
+    #Will need to figure out what goes into the shell script for admin
+    adminVM.vm.provision "shell", path: "build-admin-vm.sh"
   end
 
 end
