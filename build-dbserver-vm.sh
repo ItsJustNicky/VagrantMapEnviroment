@@ -2,9 +2,16 @@
 
 # Update Ubuntu software packages.
 apt-get update
-      
+apt-get install openssh-server
+
+ssh-keygen -t rsa -b 4096 -f /home/vagrant/.ssh/id_rsa -N ""         
+# Create a user named "admin"
+sudo adduser admin
+
+# Add "admin" to the sudo group to grant administrative privileges
+sudo usermod -aG sudo admin
 # We create a shell variable MYSQL_PWD that contains the MySQL root password
-export MYSQL_PWD='SQL_Password'
+export MYSQL_PWD='SQLpassword'
 
 # If you run the `apt-get install mysql-server` command
 # manually, it will prompt you to enter a MySQL root
@@ -28,7 +35,7 @@ service mysql start
 echo "CREATE DATABASE fvision;" | mysql
 
 # Then create a database user "webuser" with the given password.
-echo "CREATE USER 'webuser'@'%' IDENTIFIED BY 'insecure_db_pw';" | mysql
+echo "CREATE USER 'webuser'@'%' IDENTIFIED BY 'SQLpassword';" | mysql
 
 # Grant all permissions to the database user "webuser" regarding
 # the "fvision" database that we just created, above.
@@ -36,7 +43,7 @@ echo "GRANT ALL PRIVILEGES ON fvision.* TO 'webuser'@'%'" | mysql
 
 # Set the MYSQL_PWD shell variable that the mysql command will
 # try to use as the database password ...
-export MYSQL_PWD='SQL_Password'
+export MYSQL_PWD='SQLpassword'
 
 # ... and run all of the SQL within the setup-database.sql file,
 # which is part of the repository containing this Vagrantfile, so you
