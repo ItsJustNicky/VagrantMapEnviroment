@@ -1,1 +1,0 @@
-{"virtualbox":{"/vagrant":{"oowner":"vagrant","group":"vagrant","mount_options":["dmode=775,fmode=777","uid=1000","gid=1000","_netdev"],"guestpath":"/vagrant","hostpath":"H:/cosc349/A1work/cosc349a1","disabled":false,"__vagrantfile":true}}}
