@@ -1,8 +1,9 @@
-CREATE TABLE papers (
-  code varchar(7),
-  name varchar(50) NOT NULL,
-  PRIMARY KEY (code)
+CREATE TABLE locations (
+  Name varchar(50),
+  north varchar(25) NOT NULL,
+  east varchar(25) NOT NULL,
+  PRIMARY KEY (Name)
 );
 
-INSERT INTO papers VALUES ('COSC326','Computational Problem Solving');
-INSERT INTO papers VALUES ('COSC349','Cloud Computing Architecture');
+INSERT INTO locations VALUES ('Otago CompSci building','-45.866459667117375', '170.51839959000793');
+INSERT INTO locations VALUES ('Wellington Parliment building','-41.27766252373128', '174.77635991007625');
