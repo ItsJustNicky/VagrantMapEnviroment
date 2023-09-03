@@ -8,9 +8,12 @@ ssh-keygen -t rsa -b 4096 -f /home/vagrant/.ssh/id_rsa -N ""
 # Create a user named "admin"
 sudo adduser admin
 
+
+
 # Add "admin" to the sudo group to grant administrative privileges
 sudo usermod -aG sudo admin
 # We create a shell variable MYSQL_PWD that contains the MySQL root password
+
 export MYSQL_PWD='SQLpassword'
 
 # If you run the `apt-get install mysql-server` command
