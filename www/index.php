@@ -19,6 +19,11 @@ try {
     while ($row = $q->fetch(PDO::FETCH_ASSOC)) {
         $locations[] = $row;
     }
+    $q = $pdo->query("SELECT * FROM areas");
+    $areas = [];
+    while ($row = $q->fetch(PDO::FETCH_ASSOC)) {
+        $areas[] = $row;
+    }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     die(); // Terminate the script
@@ -36,6 +41,7 @@ try {
     <script>
         // Pass the JSON data to your JavaScript
         var locationsData = <?php echo json_encode($locations); ?>;
+        var areasData = <?php echo json_encode($areas); ?>;
     </script>
     <script src='/leaflet/leaflet.js'></script>
 </head>
@@ -47,10 +53,10 @@ try {
 
     <aside id="mapBar">
         <div id="text">
-            <p>Welcome to<br>the WebServer MapVM</p>
-            <p>This is used to track points stored within the <a href="test-database.php">DatabaseVM</a></p>
+            <h3>Welcome to<br>the WebServer MapVM</h3>
+            <h3>This is used to track points stored within the <a href="test-database.php">DatabaseVM</a></h3>
        
-            <p>If you would like to add more points for tracking consult the adminVM </p>
+            <h3>If you would like to add more points for tracking consult the adminVM </h3>
         </div>
         <div id="map"></div>
     </aside>

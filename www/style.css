@@ -101,3 +101,18 @@ box-shadow: 2px 2px 8px #0007;
   border-radius: 4px;
   width: 180px;
 }
+#box{
+  background-color: #f2f2f2;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 3%;
+  position: absolute;
+  border-radius: 6px;
+  box-shadow: 2px 2px 8px #0007;
+  top: 7%; /* Adjust this value to control the distance from the top */
+  left: 17%; /* Adjust this value to control the distance from the left */
+
+}
+h3{
+  color: #f2f2f2;
+}

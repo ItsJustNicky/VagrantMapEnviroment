@@ -58,19 +58,18 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", inline: <<-SHELL
   #   apt-get update
   #   apt-get install -y apache2
+  config.vm.define "adminVM" do |adminVM|
 
-  config.vm.define "webVM" do |webVM|
+    adminVM.vm.hostname = "adminVM"
+	
+    adminVM.vm.network "private_network", ip: "192.168.56.13"
 
-    webVM.vm.hostname = "webVM"
-
-    webVM.vm.network "forwarded_port", guest:80, host:8080, host_ip:"127.0.0.1"
-
-    webVM.vm.network "private_network", ip: "192.168.56.11"
-
-    webVM.vm.synced_folder ".", "/vagrant", oowner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-
-    webVM.vm.provision "shell", path: "build-webserver-vm.sh"
-  
+    adminVM.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    
+    #Will need to figure out what goes into the shell script for admin
+    adminVM.vm.provision "shell", path: "build-admin-vm.sh"
+	
+	adminVM.ssh.insert_key = false
   end
 
   config.vm.define "databaseVM" do |databaseVM|
@@ -85,16 +84,20 @@ Vagrant.configure("2") do |config|
   
   end
   
-  config.vm.define "adminVM" do |adminVM|
+  config.vm.define "webVM" do |webVM|
 
-    adminVM.vm.hostname = "adminVM"
-	
-    adminVM.vm.network "private_network", ip: "192.168.56.13"
+    webVM.vm.hostname = "webVM"
 
-    adminVM.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-    
-    #Will need to figure out what goes into the shell script for admin
-    adminVM.vm.provision "shell", path: "build-admin-vm.sh"
+    webVM.vm.network "forwarded_port", guest:80, host:8080, host_ip:"127.0.0.1"
+
+    webVM.vm.network "private_network", ip: "192.168.56.11"
+
+    webVM.vm.synced_folder ".", "/vagrant", oowner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+
+    webVM.vm.provision "shell", path: "build-webserver-vm.sh"
+  
   end
+
+
 
 end
